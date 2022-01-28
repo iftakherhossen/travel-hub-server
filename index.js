@@ -23,12 +23,20 @@ async function run() {
         console.log('database connected!')
         const database = client.db('travelHub');
         const destinationsCollection = database.collection('services');
+        const blogsCollection = database.collection('blogs');
 
         // GET destinations API
         app.get('/destinations', async (req, res) => {
             const cursor = destinationsCollection.find({});
             const destinations = await cursor.toArray();
             res.send(destinations);
+        })
+
+        // GET blogs API
+        app.get('/blogs', async (req, res) => {
+            const cursor = blogsCollection.find({});
+            const blogs = await cursor.toArray();
+            res.send(blogs);
         })
     }
     finally {
